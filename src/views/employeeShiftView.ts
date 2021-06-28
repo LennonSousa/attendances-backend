@@ -7,6 +7,7 @@ export default {
         return {
             id: shift.id,
             name: shift.name,
+            tolerance: shift.tolerance,
             days: shift.days ? dayView.renderMany(shift.days) : [],
             employees: shift.employees ? employeeView.renderMany(shift.employees) : [],
         }

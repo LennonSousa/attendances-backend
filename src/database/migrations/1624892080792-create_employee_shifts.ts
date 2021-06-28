@@ -17,6 +17,11 @@ export class createEmployeeShifts1624892080792 implements MigrationInterface {
                     name: 'name',
                     type: 'varchar'
                 },
+                {
+                    name: 'tolerance',
+                    type: 'number',
+                    default: 0,
+                },
             ],
         }));
     }

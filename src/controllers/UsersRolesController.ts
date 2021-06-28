@@ -5,7 +5,7 @@ import * as Yup from 'yup';
 import userRoleView from '../views/userRoleView';
 import { UsersRolesRepository } from '../repositories/UsersRolesRepository';
 
-type Role = 'customers' | 'institutions' | 'licensings' | 'properties' | 'projects' | 'banks' | 'users';
+type Role = 'employees' | 'shifts' | 'attendances' | 'estimates' | 'accompaniments' | 'services' | 'users';
 type Grant = 'view' | 'view_self' | 'create' | 'update' | 'update_self' | 'remove';
 
 const grants = ['view', 'view_self', 'create', 'update', 'update_self', 'remove'];
@@ -38,27 +38,27 @@ export default {
     generate(request: Request, response: Response) {
         const userRoles = [
             {
-                role: 'customers',
+                role: 'employees',
                 grants,
             },
             {
-                role: 'properties',
+                role: 'estimates',
                 grants,
             },
             {
-                role: 'projects',
+                role: 'accompaniment',
                 grants,
             },
             {
-                role: 'licensings',
+                role: 'attendances',
                 grants,
             },
             {
-                role: 'institutions',
+                role: 'shifts',
                 grants,
             },
             {
-                role: 'banks',
+                role: 'services',
                 grants,
             },
             {

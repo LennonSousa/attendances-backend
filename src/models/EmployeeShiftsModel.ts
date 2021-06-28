@@ -11,6 +11,9 @@ export default class UsersModel {
     @Column()
     name: string;
 
+    @Column()
+    tolerance: number;
+
     @OneToMany(() => ShiftDay, shiftDay => shiftDay.shift)
     @JoinColumn({ name: 'shift_id' })
     days: ShiftDay[];

@@ -11,7 +11,7 @@ export default {
     async index(request: Request, response: Response) {
         const { user_id } = request.params;
 
-        if (! await UsersRolesController.can(user_id, "customers", "view"))
+        if (! await UsersRolesController.can(user_id, "employees", "view"))
             return response.status(403).send({ error: 'User permission not granted!' });
 
         const customersRepository = getCustomRepository(EmployeesRepository);
@@ -31,7 +31,7 @@ export default {
     async show(request: Request, response: Response) {
         const { id, user_id } = request.params;
 
-        if (! await UsersRolesController.can(user_id, "customers", "view"))
+        if (! await UsersRolesController.can(user_id, "employees", "view"))
             return response.status(403).send({ error: 'User permission not granted!' });
 
         const customersRepository = getCustomRepository(EmployeesRepository);
@@ -49,7 +49,7 @@ export default {
     async create(request: Request, response: Response) {
         const { user_id } = request.params;
 
-        if (! await UsersRolesController.can(user_id, "customers", "create"))
+        if (! await UsersRolesController.can(user_id, "employees", "create"))
             return response.status(403).send({ error: 'User permission not granted!' });
 
         const {
@@ -92,7 +92,7 @@ export default {
     async update(request: Request, response: Response) {
         const { id, user_id } = request.params;
 
-        if (! await UsersRolesController.can(user_id, "customers", "update"))
+        if (! await UsersRolesController.can(user_id, "employees", "update"))
             return response.status(403).send({ error: 'User permission not granted!' });
 
         const {
@@ -129,7 +129,7 @@ export default {
     async delete(request: Request, response: Response) {
         const { id, user_id } = request.params;
 
-        if (! await UsersRolesController.can(user_id, "customers", "remove"))
+        if (! await UsersRolesController.can(user_id, "employees", "remove"))
             return response.status(403).send({ error: 'User permission not granted!' });
 
         const customersRepository = getCustomRepository(EmployeesRepository);
