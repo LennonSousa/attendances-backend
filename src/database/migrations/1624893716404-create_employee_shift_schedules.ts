@@ -26,8 +26,7 @@ export class createEmployeeShiftSchedules1624893716404 implements MigrationInter
                 },
                 {
                     name: 'shift_day_id',
-                    type: 'integer',
-                    unsigned: true,
+                    type: 'varchar',
                 },
             ],
             foreignKeys: [

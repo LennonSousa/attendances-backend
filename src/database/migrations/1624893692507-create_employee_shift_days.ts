@@ -8,11 +8,10 @@ export class createEmployeeShiftDays1624893692507 implements MigrationInterface 
             columns: [
                 {
                     name: 'id',
-                    type: 'integer',
-                    unsigned: true,
+                    type: 'varchar',
                     isPrimary: true,
                     isGenerated: true,
-                    generationStrategy: 'increment'
+                    generationStrategy: 'uuid',
                 },
                 {
                     name: 'week_day',

@@ -18,6 +18,10 @@ export class createEmployees1624893723930 implements MigrationInterface {
                     type: 'varchar',
                 },
                 {
+                    name: 'pin',
+                    type: 'varchar',
+                },
+                {
                     name: 'created_by',
                     type: 'varchar',
                 },
