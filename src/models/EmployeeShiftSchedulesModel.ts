@@ -3,8 +3,8 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 import ShiftDay from './EmployeeShiftDaysModel';
 
 @Entity('employee_shift_schedules')
-export default class UsersModel {
-    @PrimaryGeneratedColumn('increment')
+export default class EmployeeShiftSchedulesModel {
+    @PrimaryGeneratedColumn()
     readonly id: number;
 
     @Column()

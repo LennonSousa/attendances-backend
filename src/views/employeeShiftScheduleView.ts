@@ -12,6 +12,8 @@ export default {
     },
 
     renderMany(schedules: Schedule[]) {
-        return schedules.map(schedule => this.render(schedule));
+        const softedSchedules = schedules.sort((a, b) => a.to - b.to);
+
+        return softedSchedules.map(schedule => this.render(schedule));
     }
 }

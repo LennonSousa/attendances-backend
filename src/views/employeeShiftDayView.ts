@@ -13,7 +13,7 @@ export default {
     },
 
     renderMany(days: Day[]) {
-        const softedDays = days.sort(day => { return day.week_day - day.week_day });
+        const softedDays = days.sort((a, b) => a.week_day - b.week_day);
 
         return softedDays.map(day => this.render(day));
     }

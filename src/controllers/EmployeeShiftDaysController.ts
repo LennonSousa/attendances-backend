@@ -57,7 +57,7 @@ export default {
         };
 
         const schema = Yup.object().shape({
-            week_day: Yup.string().required(),
+            week_day: Yup.number().required(),
             shift: Yup.string().required(),
         });
 
@@ -91,8 +91,7 @@ export default {
         };
 
         const schema = Yup.object().shape({
-            week_day: Yup.string().required(),
-            shift: Yup.string().required(),
+            week_day: Yup.number().required(),
         });
 
         await schema.validate(data, {

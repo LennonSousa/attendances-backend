@@ -31,6 +31,7 @@ export default {
         const shift = await shiftsRepository.findOneOrFail(id, {
             relations: [
                 'days',
+                'days.schedules',
                 'employees',
             ]
         });

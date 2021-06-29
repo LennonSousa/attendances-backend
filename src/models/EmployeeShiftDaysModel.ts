@@ -4,7 +4,7 @@ import Shift from './EmployeeShiftsModel';
 import ShiftSchedule from './EmployeeShiftSchedulesModel';
 
 @Entity('employee_shift_days')
-export default class UsersModel {
+export default class EmployeeShiftDaysModel {
     @PrimaryGeneratedColumn('uuid')
     readonly id: string;
 

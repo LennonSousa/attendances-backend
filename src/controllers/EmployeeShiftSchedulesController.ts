@@ -46,6 +46,7 @@ export default {
         const {
             from,
             to,
+            day,
         } = request.body;
 
         const schedulesRepository = getCustomRepository(EmployeeShiftSchedulesRepository);
@@ -53,11 +54,13 @@ export default {
         const data = {
             from,
             to,
+            day,
         };
 
         const schema = Yup.object().shape({
             from: Yup.number().required(),
             to: Yup.number().required(),
+            day: Yup.string().required(),
         });
 
         await schema.validate(data, {
