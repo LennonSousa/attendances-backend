@@ -95,7 +95,7 @@ export default {
 
         if (foundUser && foundUser.active) return response.status(400).json({ error: 'User already exists and activated!' });
 
-        if (!foundUser.active) return response.status(400).json({ error: 'User not activated!' });
+        if (foundUser && !foundUser.active) return response.status(400).json({ error: 'User not activated!' });
 
         // If dosen't exists, create a new user with a temporary password and send a e-mail.
         if (!foundUser) await usersRepository.save(newUser);
