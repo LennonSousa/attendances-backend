@@ -9,6 +9,6 @@ services:
             - '14728:3306'
         environment:
             MYSQL_DATABASE: logicadeploy
-            MYSQL_ROOT_PASSWORD: 74feb1826329dd3bcdeabb9df6686ba4
+            MYSQL_ROOT_PASSWORD: example
             MYSQL_USER: userdeploy
-            MYSQL_PASSWORD: 3e1c2aaee748fdfe06b470ba377c3e11
+            MYSQL_PASSWORD: example
