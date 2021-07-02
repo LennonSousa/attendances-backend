@@ -4,7 +4,7 @@ import Shift from './EmployeeShiftsModel';
 import Attendance from './EmployeeAttendancesModel';
 
 @Entity('employees')
-export default class UsersModel {
+export default class EmployeesModel {
     @PrimaryGeneratedColumn('uuid')
     readonly id: string;
 

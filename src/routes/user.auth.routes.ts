@@ -55,7 +55,8 @@ userAuthRoutes.post('/attendances/employees', usersAuthMiddleware, EmployeesCont
 userAuthRoutes.put('/attendances/employees/:id', usersAuthMiddleware, EmployeesController.update);
 userAuthRoutes.delete('/attendances/employees/:id', usersAuthMiddleware, EmployeesController.delete);
 
-userAuthRoutes.get('attendances/employee/:id', usersAuthMiddleware, EmployeeAttendancesController.index);
-userAuthRoutes.post('attendances/employee/:id', usersAuthMiddleware, EmployeeAttendancesController.create);
+userAuthRoutes.get('/attendances/employee/:id', usersAuthMiddleware, EmployeeAttendancesController.index);
+userAuthRoutes.get('/attendances', usersAuthMiddleware, EmployeeAttendancesController.show);
+userAuthRoutes.post('/attendances', usersAuthMiddleware, EmployeeAttendancesController.create);
 
 export default userAuthRoutes;

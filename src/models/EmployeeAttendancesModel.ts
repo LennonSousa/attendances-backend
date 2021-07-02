@@ -3,12 +3,21 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 import Employee from './EmployeesModel';
 
 @Entity('employee_attendances')
-export default class UsersModel {
+export default class EmployeeAttendancesModel {
     @PrimaryGeneratedColumn('uuid')
     readonly id: string;
 
     @Column()
-    created_at: Date;
+    in: boolean;
+
+    @Column()
+    in_at: Date;
+
+    @Column()
+    out: boolean;
+
+    @Column()
+    out_at: Date;
 
     @ManyToOne(() => Employee, employee => employee.attendances)
     @JoinColumn({ name: 'employee_id' })

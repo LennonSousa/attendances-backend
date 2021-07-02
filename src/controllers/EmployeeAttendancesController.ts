@@ -1,9 +1,12 @@
 import { Request, Response } from 'express';
-import { getCustomRepository } from 'typeorm';
+import { Between, getCustomRepository } from 'typeorm';
 import * as Yup from 'yup';
+import { endOfToday, startOfToday } from 'date-fns';
 
+import employeeView from '../views/employeeView';
 import employeeAttendanceView from '../views/employeeAttendanceView';
 import { EmployeeAttendancesRepository } from '../repositories/EmployeeAttendancesRepository';
+import { EmployeesRepository } from '../repositories/EmployeesRepository';
 import UsersRolesController from './UsersRolesController';
 
 export default {
@@ -20,7 +23,7 @@ export default {
                 'employee',
             ],
             order: {
-                created_at: "ASC"
+                in_at: "ASC"
             }
         });
 
@@ -28,21 +31,39 @@ export default {
     },
 
     async show(request: Request, response: Response) {
-        const { id, user_id } = request.params;
+        const { user_id } = request.params;
+        const { pin } = request.query;
 
         if (! await UsersRolesController.can(user_id, "attendances", "view"))
             return response.status(403).send({ error: 'User permission not granted!' });
 
-        const attendancesRepository = getCustomRepository(EmployeeAttendancesRepository);
+        const employeesRepository = getCustomRepository(EmployeesRepository);
 
-        const attendance = await attendancesRepository.findOneOrFail(id, {
+        const foundEmployee = await employeesRepository.findOne({
+            where: { pin },
             relations: [
-                'employee',
-                'attendances',
+                'shift',
+                'shift.days',
+                'shift.days.schedules',
             ]
         });
 
-        return response.json(employeeAttendanceView.render(attendance));
+        if (!foundEmployee)
+            return response.status(404).json({
+                error: 'Employee pin dosen\'t exists.'
+            });
+
+        const attendancesRepository = getCustomRepository(EmployeeAttendancesRepository);
+
+        const attendancesToday = await attendancesRepository.find({
+            where: { employee: foundEmployee.id, in_at: Between(startOfToday(), endOfToday()) },
+        });
+
+        return response.json({
+            employee: employeeView.render(foundEmployee),
+            attendancesToday: employeeAttendanceView.renderMany(attendancesToday),
+            now: new Date(),
+        });
     },
 
     async create(request: Request, response: Response) {
@@ -52,13 +73,54 @@ export default {
             return response.status(403).send({ error: 'User permission not granted!' });
 
         const {
-            employee,
+            pin,
         } = request.body;
+
+        const employeesRepository = getCustomRepository(EmployeesRepository);
+
+        const foundEmployee = await employeesRepository.findOne({
+            where: { pin },
+        });
+
+        if (!foundEmployee)
+            return response.status(404).json({
+                error: 'Employee pin dosen\'t exists.'
+            });
 
         const attendancesRepository = getCustomRepository(EmployeeAttendancesRepository);
 
+        const attendancesToday = await attendancesRepository.find({
+            where: { employee: foundEmployee.id, in_at: Between(startOfToday(), endOfToday()) },
+        });
+
+        const toUpdateToday = attendancesToday.find(attendanceToday => { return !attendanceToday.out });
+
+        if (toUpdateToday) {
+            const data = {
+                out: true,
+                out_at: new Date(),
+            };
+
+            const schema = Yup.object().shape({
+                out: Yup.boolean().required(),
+                out_at: Yup.date().required(),
+            });
+
+            await schema.validate(data, {
+                abortEarly: false,
+            });
+
+            const attendance = attendancesRepository.create(data);
+
+            await attendancesRepository.update(toUpdateToday.id, attendance);
+
+            return response.status(201).json(employeeAttendanceView.render(attendance));
+        }
+
         const data = {
-            employee,
+            in: true,
+            in_at: new Date(),
+            employee: foundEmployee.id as any,
         };
 
         const schema = Yup.object().shape({

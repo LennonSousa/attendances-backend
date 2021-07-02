@@ -21,7 +21,7 @@ export default {
                 'shift',
             ],
             order: {
-                created_at: "ASC"
+                created_at: "DESC"
             }
         });
 

@@ -14,7 +14,22 @@ export class createEmployeeAttendances1624901879536 implements MigrationInterfac
                     generationStrategy: 'uuid',
                 },
                 {
-                    name: 'created_at',
+                    name: 'in',
+                    type: 'boolean',
+                    default: false,
+                },
+                {
+                    name: 'in_at',
+                    type: 'datetime',
+                    default: 'Now()',
+                },
+                {
+                    name: 'out',
+                    type: 'boolean',
+                    default: false,
+                },
+                {
+                    name: 'out_at',
                     type: 'datetime',
                     default: 'Now()',
                 },
