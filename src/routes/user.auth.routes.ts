@@ -31,32 +31,32 @@ userAuthRoutes.put('/users/roles/:id', usersAuthMiddleware, UsersRolesController
 
 userAuthRoutes.put('/users/new/:id', usersAuthMiddleware, UsersNewController.update);
 
-userAuthRoutes.get('/attendances/shifts/days', usersAuthMiddleware, EmployeeShiftDaysController.index);
-userAuthRoutes.get('/attendances/shifts/days/:id', usersAuthMiddleware, EmployeeShiftDaysController.show);
-userAuthRoutes.post('/attendances/shifts/days', usersAuthMiddleware, EmployeeShiftDaysController.create);
-userAuthRoutes.put('/attendances/shifts/days/:id', usersAuthMiddleware, EmployeeShiftDaysController.update);
-userAuthRoutes.delete('/attendances/shifts/days/:id', usersAuthMiddleware, EmployeeShiftDaysController.delete);
+userAuthRoutes.get('/employees/attendances', usersAuthMiddleware, EmployeeAttendancesController.index);
+userAuthRoutes.get('/employees/attendances/register', usersAuthMiddleware, EmployeeAttendancesController.show);
+userAuthRoutes.post('/employees/attendances', usersAuthMiddleware, EmployeeAttendancesController.create);
 
-userAuthRoutes.get('/attendances/shifts/schedules', usersAuthMiddleware, EmployeeShiftSchedulesController.index);
-userAuthRoutes.get('/attendances/shifts/schedules/:id', usersAuthMiddleware, EmployeeShiftSchedulesController.show);
-userAuthRoutes.post('/attendances/shifts/schedules', usersAuthMiddleware, EmployeeShiftSchedulesController.create);
-userAuthRoutes.put('/attendances/shifts/schedules/:id', usersAuthMiddleware, EmployeeShiftSchedulesController.update);
-userAuthRoutes.delete('/attendances/shifts/schedules/:id', usersAuthMiddleware, EmployeeShiftSchedulesController.delete);
+userAuthRoutes.get('/employees/shifts/days', usersAuthMiddleware, EmployeeShiftDaysController.index);
+userAuthRoutes.get('/employees/shifts/days/:id', usersAuthMiddleware, EmployeeShiftDaysController.show);
+userAuthRoutes.post('/employees/shifts/days', usersAuthMiddleware, EmployeeShiftDaysController.create);
+userAuthRoutes.put('/employees/shifts/days/:id', usersAuthMiddleware, EmployeeShiftDaysController.update);
+userAuthRoutes.delete('/employees/shifts/days/:id', usersAuthMiddleware, EmployeeShiftDaysController.delete);
 
-userAuthRoutes.get('/attendances/shifts', usersAuthMiddleware, EmployeeShiftsController.index);
-userAuthRoutes.get('/attendances/shifts/:id', usersAuthMiddleware, EmployeeShiftsController.show);
-userAuthRoutes.post('/attendances/shifts', usersAuthMiddleware, EmployeeShiftsController.create);
-userAuthRoutes.put('/attendances/shifts/:id', usersAuthMiddleware, EmployeeShiftsController.update);
-userAuthRoutes.delete('/attendances/shifts/:id', usersAuthMiddleware, EmployeeShiftsController.delete);
+userAuthRoutes.get('/employees/shifts/schedules', usersAuthMiddleware, EmployeeShiftSchedulesController.index);
+userAuthRoutes.get('/employees/shifts/schedules/:id', usersAuthMiddleware, EmployeeShiftSchedulesController.show);
+userAuthRoutes.post('/employees/shifts/schedules', usersAuthMiddleware, EmployeeShiftSchedulesController.create);
+userAuthRoutes.put('/employees/shifts/schedules/:id', usersAuthMiddleware, EmployeeShiftSchedulesController.update);
+userAuthRoutes.delete('/employees/shifts/schedules/:id', usersAuthMiddleware, EmployeeShiftSchedulesController.delete);
 
-userAuthRoutes.get('/attendances/employees', usersAuthMiddleware, EmployeesController.index);
-userAuthRoutes.get('/attendances/employees/:id', usersAuthMiddleware, EmployeesController.show);
-userAuthRoutes.post('/attendances/employees', usersAuthMiddleware, EmployeesController.create);
-userAuthRoutes.put('/attendances/employees/:id', usersAuthMiddleware, EmployeesController.update);
-userAuthRoutes.delete('/attendances/employees/:id', usersAuthMiddleware, EmployeesController.delete);
+userAuthRoutes.get('/employees/shifts', usersAuthMiddleware, EmployeeShiftsController.index);
+userAuthRoutes.get('/employees/shifts/:id', usersAuthMiddleware, EmployeeShiftsController.show);
+userAuthRoutes.post('/employees/shifts', usersAuthMiddleware, EmployeeShiftsController.create);
+userAuthRoutes.put('/employees/shifts/:id', usersAuthMiddleware, EmployeeShiftsController.update);
+userAuthRoutes.delete('/employees/shifts/:id', usersAuthMiddleware, EmployeeShiftsController.delete);
 
-userAuthRoutes.get('/attendances/employee/:id', usersAuthMiddleware, EmployeeAttendancesController.index);
-userAuthRoutes.get('/attendances', usersAuthMiddleware, EmployeeAttendancesController.show);
-userAuthRoutes.post('/attendances', usersAuthMiddleware, EmployeeAttendancesController.create);
+userAuthRoutes.get('/employees', usersAuthMiddleware, EmployeesController.index);
+userAuthRoutes.get('/employees/:id', usersAuthMiddleware, EmployeesController.show);
+userAuthRoutes.post('/employees', usersAuthMiddleware, EmployeesController.create);
+userAuthRoutes.put('/employees/:id', usersAuthMiddleware, EmployeesController.update);
+userAuthRoutes.delete('/employees/:id', usersAuthMiddleware, EmployeesController.delete);
 
 export default userAuthRoutes;

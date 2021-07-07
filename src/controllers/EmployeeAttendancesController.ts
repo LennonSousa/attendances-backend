@@ -12,18 +12,39 @@ import UsersRolesController from './UsersRolesController';
 export default {
     async index(request: Request, response: Response) {
         const { user_id } = request.params;
+        const { start, end, employee } = request.query;
 
         if (! await UsersRolesController.can(user_id, "attendances", "view"))
             return response.status(403).send({ error: 'User permission not granted!' });
 
         const attendancesRepository = getCustomRepository(EmployeeAttendancesRepository);
 
+        if (employee) {
+            const attendances = await attendancesRepository.find({
+                where: {
+                    in_at: Between(start, end),
+                    employee
+                },
+                relations: [
+                    'employee',
+                ],
+                order: {
+                    in_at: "ASC"
+                }
+            });
+
+            return response.json(employeeAttendanceView.renderMany(attendances));
+        }
+
         const attendances = await attendancesRepository.find({
+            where: {
+                in_at: Between(start, end),
+            },
             relations: [
                 'employee',
             ],
             order: {
-                in_at: "ASC"
+                employee: "ASC"
             }
         });
 
@@ -56,7 +77,12 @@ export default {
         const attendancesRepository = getCustomRepository(EmployeeAttendancesRepository);
 
         const attendancesToday = await attendancesRepository.find({
-            where: { employee: foundEmployee.id, in_at: Between(startOfToday(), endOfToday()) },
+            where: {
+                employee: foundEmployee.id, in_at: Between(startOfToday(), endOfToday())
+            },
+            order: {
+                in_at: "ASC"
+            }
         });
 
         return response.json({

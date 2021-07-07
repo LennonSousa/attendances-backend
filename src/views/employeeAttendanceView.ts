@@ -9,7 +9,7 @@ export default {
             in_at: attendance.in_at,
             out: attendance.out,
             out_at: attendance.out_at,
-            shift: attendance.employee && employeeView.render(attendance.employee),
+            employee: attendance.employee && employeeView.render(attendance.employee),
         }
     },
 
