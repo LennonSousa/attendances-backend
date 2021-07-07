@@ -145,7 +145,6 @@ export default {
 
         const data = {
             in: true,
-            in_at: new Date(),
             employee: foundEmployee.id as any,
         };
 
